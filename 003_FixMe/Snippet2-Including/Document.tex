@@ -1,0 +1,23 @@
+\documentclass[12pt]{article}
+
+\title{Fix Me}
+
+\newcommand{\draft}{}
+
+\include{ReleaseFixes}
+
+\begin{document}
+
+Lots of text I want to publish. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\fbr{Remember to cite Jones}
+
+More text for the final document. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\fbr{Mention Smith (1996) }
+
+\immediate\closeoutputstream{releasefixes}
+
+\section{Things to Fix}
+\begin{itemize}
+	\input{\jobname.FixBeforeRelease}
+\end{itemize}
+\end{document}

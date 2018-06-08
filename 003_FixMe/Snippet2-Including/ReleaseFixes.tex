@@ -1,0 +1,22 @@
+
+\usepackage{color}
+
+%Streaming File IO package
+\usepackage{newfile}
+
+%Open output stream for releasefixes output
+\newoutputstream{releasefixes}
+
+%Open a file, right now, to write to
+%\jobname is the name of the compiling job, so we can name our file to match the .tex, .bbl etc files
+%First arg. is the filename, second the stream this is for
+\immediate\openoutputfile{\jobname.FixBeforeRelease}{releasefixes}
+
+%Text effects for our new command
+\newcommand{\fbrtext}[1]{\textcolor{red}{\textbf{#1}}}
+
+%Main command: add text effect to text, and feed the same string into our output file
+%We also output the source line number so we can find where the comment is
+%Since the final file is to be included as a list, we also include a '\item' directive
+%\noexpand makes sure this is written into the file as a command string, not expanded right now like \inputlineno
+\newcommand{\fbr}[1]{\fbrtext{#1}\addtostream{releasefixes}{\noexpand\item Line \the\inputlineno : #1}}

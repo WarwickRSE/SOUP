@@ -1,0 +1,31 @@
+\usepackage{ifthen}
+
+\usepackage{color}
+
+%Streaming File IO package
+\usepackage{newfile}
+
+%Open output stream for releasefixes output
+\newoutputstream{releasefixes}
+
+%Open a file, right now, to write to
+%\jobname is the name of the compiling job, so we can name our file to match the .tex, .bbl etc files
+%First arg. is the filename, second the stream this is for
+\immediate\openoutputfile{\jobname.FixBeforeRelease}{releasefixes}
+
+%Define a flag for red text
+\newboolean{usered}
+%Set it
+\setboolean{usered}{false}
+
+%Text effects for our new command
+%Use our flag to dictate whether we want it red
+\ifthenelse{\boolean{usered}}{
+	\newcommand{\fbrtext}[1]{\textcolor{red}{\textbf{#1}}}
+}{
+	\newcommand{\fbrtext}[1]{\textbf{#1}}
+}
+%Main command: add text effect to text, and feed the same string into our output file
+%We also output the source line number so we can find where the comment is
+%This time, we only do this is there is a command, \draft, defined, otherwise we hide the text completely
+\newcommand{\fbr}[1]{\ifthenelse{\isundefined{\draft}}{}{\fbrtext{#1}\addtostream{releasefixes}{Line \the\inputlineno : #1}}}
